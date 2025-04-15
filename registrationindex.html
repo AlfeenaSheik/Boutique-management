@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/registrationstyle.css">
+   
+    <title>Register</title>
+</head>
+<script>
+const setError=(element,message)=> {58
+    const inputControl=element.parentElement;
+    const errorDisplay=inputControl.querySelector('.error');
+
+    errorDisplay.innerText=message;
+    inputControl.classList.add('success');
+    inputControl.classList.remove('error');
+};
+
+const isValidEmail=email =>{
+    const re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const lowercaseEmail = email.toLowerCase();
+    return re.test(lowercaseEmail);
+};
+const setSuccess = (element) => {
+    const inputControl = element.parentElement;
+    inputControl.classList.remove('error');
+    inputControl.classList.add('success');
+};
+
+function validateInputs() {
+    let ct = 0;
+    const fullname = document.getElementById('nam');
+    const email = document.getElementById('email');
+    const usern = document.getElementById('name');
+    const password = document.getElementById('password');
+    const password2 = document.getElementById('confirm_password');
+    const phonenumber = document.getElementById('Phone_number');
+
+    const fullnameValue = fullname.value.trim();
+    const emailValue = email.value.trim();
+    const usernameValue = usern.value.trim();
+    const passwordValue = password.value.trim();
+    const password2Value = password2.value.trim();
+    const phonenumberValue = phonenumber.value.trim();
+
+    if (fullnameValue === '') {
+        setError(fullname, 'Fullname is required');
+    } else {
+        setSuccess(fullname);
+        ct++;
+    }
+
+    if (usernameValue === '') {
+        setError(usern, 'Username is required');
+    } else {
+        setSuccess(usern);
+        ct++;
+    }
+
+    if (emailValue === '') {
+        setError(email, 'Email is required');
+    } else if (!isValidEmail(emailValue.trim())) {
+        setError(email, 'Provide a valid email address');
+    } else {
+        setSuccess(email);
+        ct++;
+    }
+
+    if (passwordValue === '') {
+        setError(password, 'Password is required');
+    } else if (passwordValue.length < 8) {
+        setError(password, 'Password must be at least 8 characters');
+    } else {
+        setSuccess(password);
+        ct++;
+    }
+
+    if (password2Value === '') {
+    setError(password2, 'Please confirm your password');
+    } else {
+    const trimmedPasswordValue = passwordValue.trim();
+    const trimmedPassword2Value = password2Value.trim();
+
+    console.log('Password Value:', trimmedPasswordValue);
+    console.log('Confirm Password Value:', trimmedPassword2Value);
+
+    if (trimmedPassword2Value !== trimmedPasswordValue) {
+        setError(password2, 'Passwords do not match');
+    } else {
+        setSuccess(password2);
+        ct++;
+    }
+    }
+
+    if (phonenumberValue.length === 0) {
+    setError(phonenumber, 'Phone number is required');
+    } else if (phonenumberValue.length !== 10) {
+    setError(phonenumber, 'Phone number must be 10 digits');
+    } else {
+    const isNumeric = /^\d+$/.test(phonenumberValue);
+    if (!isNumeric) {
+        setError(phonenumber, 'Invalid phone number');
+    } else {
+        setSuccess(phonenumber);
+        ct++;
+    }
+    }
+
+    if (ct === 6) {
+        window.location.assign("login.html");
+    }
+}
+
+function nxt() {
+    window.location.assign("homepage.html");
+}
+
+</script>
+<body>
+    <div class="Container">
+        <form id="form" action="insertregister" method="GET">
+            <h2>Registration Form</h2>
+            <div class="content">
+                <div class="input-box">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="nam" placeholder="Enter full name" name="name" required>
+                    <span class="error"></span>
+                </div>
+                <div class="input-box">
+                    <label for="username">Username</label>
+                    <input type="text" id="name" placeholder="Enter username" name="uname"  required>
+                     <span class="error"></span>
+                </div>
+                <div class="input-box">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your valid email address" name="email" required>
+                    <span class="error"></span>
+                </div>
+                <div class="input-box">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" placeholder="Enter phone number" name="phone" id="Phone_number" required>
+                    <span class="error"></span>
+                </div>
+                <div class="input-box">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your new password" name="password" required>
+                    <span class="error"></span>
+                </div>
+                <div class="input-box">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" placeholder="Confirm your password" id="confirm_password" required>
+                    <span class="error"></span>
+                </div>
+            </div>
+            <div class="alert">
+              <p>By clicking sign up, you agree to continue to our<a href="#">Terms,</a> <a href="#">Privacy Policy</a> and <a href="#">Cookies Policy.</a> You may receive SMS notifications from us and can apt at any time.</p>
+            </div>
+            
+            <div class="button-container"> 
+                <button type="submit" onclick="validateInputs()">Register</button>
+            </div>
+        </form>
+        
+    </div>
+    <button class="left-corner-button" onclick="nxt()">Home</button>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Admin Login Form </title>
+    <link rel="stylesheet" href="./css/adminloginstyle.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="wrapper">
+        <form method="GET" action="insertadmin">
+            <h1> Admin Login</h1>
+            <div class="input-box" >
+                <input type="email" name="email" placeholder="Email-ID" id="email" required>
+                <div style="padding-left:15px; padding-top:5px;"><i class="bx bxs-user"></i></div>
+            </div>
+            <div class="input-box">
+                <input type="password" name="password" placeholder="Password" id="password" required>
+                <div style="padding-left:15px;padding-top:5px;"><i class="bx bxs-lock-alt"></i></div>
+            </div>
+            <input type="submit" class="btn" value="Login">
+        </form>
+        
+    </div>
+    <button class="left-corner-button" onclick="nxt()">Home</button>
+    <script>
+        function nxt(){
+            window.location.assign("homepage.html");
+        }
+    </script>
+</body>
+</html>
